@@ -1,0 +1,65 @@
+version: '3.2'
+
+services:
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/logs:/var/log/nginx/
+  php:
+    image: php:8.1-fpm
+    volumes:
+      - ./:/var/www/html
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: rootpswd
+      MYSQL_USER: tester
+      MYSQL_PASSWORD: testing
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
+  #frontend:
+  #  build: frontend
+  #  ports:
+  #    - 20080:80
+  #  volumes:
+  #    # Re-use local composer cache via host-volume
+  #    - ~/.composer-docker/cache:/root/.composer/cache:delegated
+  #    # Mount source-code for development
+  #    - ./:/app
+
+  #backend:
+  #  build: backend
+  #  ports:
+  #    - 21080:80
+  #  volumes:
+  #    # Re-use local composer cache via host-volume
+  #    - ~/.composer-docker/cache:/root/.composer/cache:delegated
+  #    # Mount source-code for development
+  #    - ./:/app
+
+  #mysql:
+  #  image: mysql:5.7
+  #  environment:
+  #    - MYSQL_ROOT_PASSWORD=verysecret
+  #    - MYSQL_DATABASE=yii2advanced
+  #    - MYSQL_USER=yii2advanced
+  #    - MYSQL_PASSWORD=secret
+
+  #pgsql:
+  #  image: postgres:9.5
+  #  environment:
+  #    - POSTGRES_DB=yii2advanced
+  #    - POSTGRES_USER=yii2advanced
+  #    - POSTGRES_PASSWORD=secret
