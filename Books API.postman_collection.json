@@ -518,6 +518,68 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Beware of Pity\",\n    \"author\":1,\n    \"publishing_date\":\"1994-06-25\",\n    \"status\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/book/search?author=zweig&country=austria&genre=novel&date=1994-06-25",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"book",
+								"search"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "zweig"
+								},
+								{
+									"key": "country",
+									"value": "austria"
+								},
+								{
+									"key": "genre",
+									"value": "novel"
+								},
+								{
+									"key": "date",
+									"value": "1994-06-25"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
