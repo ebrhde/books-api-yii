@@ -11,7 +11,8 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
       - ./docker/nginx/logs:/var/log/nginx/
   php:
-    image: php:8.1-fpm
+    build:
+      dockerfile: ./docker/php/Dockerfile
     volumes:
       - ./:/var/www/html
   db:
@@ -29,8 +30,8 @@ services:
 volumes:
   db_data:
 
-  #frontend:
-  #  build: frontend
+  #api:
+  #  build: api
   #  ports:
   #    - 20080:80
   #  volumes:
