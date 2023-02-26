@@ -42,7 +42,7 @@ class BookGenre extends \yii\db\ActiveRecord
     {
         return [
             [['created_at'], 'safe'],
-            [['status', 'book_id', 'genre_id'], 'integer'],
+            [['book_id', 'genre_id'], 'integer'],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::className(), 'targetAttribute' => ['book_id' => 'id']],
             [['genre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['genre_id' => 'id']],
         ];

@@ -2,16 +2,15 @@
 
 namespace api\controllers\v1;
 
-use common\models\Genre;
+use common\models\Author;
 use Dersonsena\JWTTools\JWTSignatureBehavior;
-use kaabar\jwt\JwtHttpBearerAuth;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\auth\HttpBearerAuth;
 use yii\helpers\ArrayHelper;
+use yii\rest\Controller;
 
-class GenreController extends \yii\rest\Controller
+class AuthorController extends Controller
 {
     public $modelClass = '';
 
@@ -42,21 +41,23 @@ class GenreController extends \yii\rest\Controller
 
     public function actionIndex()
     {
-        if ($this->getIsUserAdmin()) {
-            $genres = Genre::find()->all();
+
+        if($this->getIsUserAdmin()) {
+            $authors = Author::find()->all();
+
         } else {
-            $genres = Genre::find()->where(['status' => Genre::STATUS_ACTIVE])->all();
+            $authors = Author::find()->where(['status' => Author::STATUS_ACTIVE])->all();
         }
 
-        if ($genres) {
-            $genresData = ArrayHelper::toArray($genres, Genre::apiArray());
+        if ($authors) {
+            $authorsData = ArrayHelper::toArray($authors, Author::apiArray());
             $dataProvider = new ArrayDataProvider([
-                'allModels' => $genresData,
+                'allModels' => $authorsData,
                 'pagination' => [
                     'pageSize' => 10,
                 ],
                 'sort' => [
-                    'attributes' => ['id', 'name'],
+                    'attributes' => ['name'],
                 ],
             ]);
 
@@ -65,17 +66,17 @@ class GenreController extends \yii\rest\Controller
                 'data' => $dataProvider
             ];
         }
-
         return [
-            'status' => 'ok',
-            'data' => 'No genres found'
+            'status' => 'error',
+            'data' => 'No authors found'
         ];
     }
 
     public function actionCreate() {
         if($this->getIsUserAdmin()) {
-            $model = new Genre();
+            $model = new Author();
             $load = $model->load(Yii::$app->request->post(), '');
+            $model->status = Author::STATUS_ACTIVE;
 
             if($load && $model->validate() && $model->save()) {
                 return [
@@ -93,8 +94,8 @@ class GenreController extends \yii\rest\Controller
     {
         $requestBody = Yii::$app->request->post();
 
-        if ($this->getIsUserAdmin() && $id && !empty($requestBody)) {
-            $model = Genre::find()
+        if ($this->getIsUserAdmin() && !empty($requestBody)) {
+            $model = Author::find()
                 ->where(['id' => $id])
                 ->one();
 
@@ -114,12 +115,12 @@ class GenreController extends \yii\rest\Controller
     public function actionDelete($id)
     {
         if ($this->getIsUserAdmin() && $id) {
-            $model = Genre::find()
+            $model = Author::find()
                 ->where(['id' => $id])
                 ->one();
 
             if ($model) {
-                $model->status = Genre::STATUS_DELETED;
+                $model->status = Author::STATUS_DELETED;
                 if ($model->save()) {
                     return [
                         'status' => 'ok',

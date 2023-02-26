@@ -17,6 +17,11 @@ return [
             'ruleTable'       => '{{%auth_rule}}',
             'defaultRoles'    => ['user'],
         ],
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
     ],
 
 ];

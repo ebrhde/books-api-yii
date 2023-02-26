@@ -54,7 +54,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'publishing_date'], 'safe'],
-            [['status', 'author_name'], 'integer'],
+            [['status', 'author_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -75,11 +75,6 @@ class Book extends \yii\db\ActiveRecord
         ];
     }
 
-    public function loadDependencies()
-    {
-        $this->genresBook = ArrayHelper::getColumn($this->genres, 'id');
-    }
-
     public static function getStatuses()
     {
         return self::$_statuses;
@@ -91,6 +86,11 @@ class Book extends \yii\db\ActiveRecord
         return ((!empty(self::$_statuses[$id])) ? self::$_statuses[$id] : 'No Specify');
     }
 
+    public function getAuthor()
+    {
+        return $this->hasOne(Author::class, ['id' => 'author_id']);
+    }
+
     public function getBookGenres()
     {
         return $this->hasMany(BookGenre::class, ['book_id' => 'id']);
@@ -100,5 +100,29 @@ class Book extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Genre::class, ['id' => 'genre_id'])
             ->via('bookGenres');
+    }
+
+    public static function apiArray() {
+        return ['common\models\Book' => [
+            'id',
+            'created_at',
+            'status' => function($model) {
+                return $model->getStatus();
+            },
+            'title',
+            'publishing_date',
+            'author' => function($model) {
+                return $model->author->name;
+            },
+            'genres' => function($model) {
+                $genresTitles = [];
+
+                foreach ($model->genres as $genre) {
+                    $genresTitles[] = $genre->title;
+                }
+
+                return implode(',', $genresTitles);
+            }
+        ]];
     }
 }

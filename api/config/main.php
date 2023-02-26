@@ -1,8 +1,5 @@
 <?php
 
-use common\components\JwtValidationData;
-use sizeg\jwt\Jwt;
-
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -46,6 +43,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'v1/author/delete/<id:([0-9]+)>' => 'v1/author/delete',
+                'v1/genre/delete/<id:([0-9]+)>' => 'v1/genre/delete',
+                'v1/book/delete/<id:([0-9]+)>' => 'v1/book/delete',
+                'v1/author/update/<id:([0-9]+)>' => 'v1/author/update',
+                'v1/genre/update/<id:([0-9]+)>' => 'v1/genre/update',
+                'v1/book/update/<id:([0-9]+)>' => 'v1/book/update',
             ],
         ],
     ],

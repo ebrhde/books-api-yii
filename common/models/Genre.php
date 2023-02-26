@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\data\ArrayDataProvider;
 use yii\db\Expression;
 
 /**
@@ -85,6 +86,17 @@ class Genre extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Book::class, ['id' => 'book_id'])
             ->via('genreBooks');
+    }
+
+    public static function apiArray() {
+        return ['common\models\Genre' => [
+            'id',
+            'created_at',
+            'status' => function($model) {
+                return $model->getStatus();
+            },
+            'title'
+        ]];
     }
 
 

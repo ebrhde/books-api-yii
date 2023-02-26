@@ -94,4 +94,16 @@ class Author extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Book::className(), ['id' => 'author_id']);
     }
+
+    public static function apiArray() {
+        return ['common\models\Author' => [
+            'id',
+            'created_at',
+            'status' => function($model) {
+                return $model->getStatus();
+            },
+            'name',
+            'country'
+        ]];
+    }
 }
