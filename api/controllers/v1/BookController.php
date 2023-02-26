@@ -17,7 +17,7 @@ class BookController extends \yii\rest\Controller
 {
     public $modelClass = '';
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'options' => [
@@ -26,7 +26,7 @@ class BookController extends \yii\rest\Controller
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
 
@@ -39,10 +39,21 @@ class BookController extends \yii\rest\Controller
             'class' => HttpBearerAuth::class,
         ];
 
+        $behaviors['verbs'] = [
+            'class' => \yii\filters\VerbFilter::class,
+            'actions' => [
+                'index' => ['GET'],
+                'search' => ['GET'],
+                'create' => ['POST'],
+                'update' => ['PATCH'],
+                'delete' => ['DELETE'],
+            ],
+        ];
+
         return $behaviors;
     }
 
-    public function actionIndex()
+    public function actionIndex(): array
     {
         if($this->getIsUserAdmin()) {
             $books = Book::find()->all();
@@ -74,7 +85,7 @@ class BookController extends \yii\rest\Controller
         ];
     }
 
-    public function actionSearch() {
+    public function actionSearch(): array {
         $searchParams = Yii::$app->request->get();
         $searchModel = new BookSearch();
         $results = $searchModel->search($searchParams);
@@ -104,7 +115,8 @@ class BookController extends \yii\rest\Controller
         ];
     }
 
-    public function actionCreate() {
+    public function actionCreate(): array
+    {
         if($this->getIsUserAdmin() && $requestBody = Yii::$app->request->post()) {
             $genreTitles = explode(',', $requestBody['genres']);
             $authorId = $requestBody['author'];
@@ -141,7 +153,7 @@ class BookController extends \yii\rest\Controller
         ];
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): array
     {
         $requestBody = Yii::$app->request->post();
         $genreTitles = explode(',', $requestBody['genres']);

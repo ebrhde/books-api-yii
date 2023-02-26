@@ -15,7 +15,7 @@ class GenreController extends \yii\rest\Controller
 {
     public $modelClass = '';
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'options' => [
@@ -24,7 +24,7 @@ class GenreController extends \yii\rest\Controller
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
 
@@ -37,10 +37,20 @@ class GenreController extends \yii\rest\Controller
             'class' => HttpBearerAuth::class,
         ];
 
+        $behaviors['verbs'] = [
+            'class' => \yii\filters\VerbFilter::class,
+            'actions' => [
+                'index' => ['GET'],
+                'create' => ['POST'],
+                'update' => ['PATCH'],
+                'delete' => ['DELETE'],
+            ],
+        ];
+
         return $behaviors;
     }
 
-    public function actionIndex()
+    public function actionIndex(): array
     {
         if ($this->getIsUserAdmin()) {
             $genres = Genre::find()->all();
@@ -72,10 +82,12 @@ class GenreController extends \yii\rest\Controller
         ];
     }
 
-    public function actionCreate() {
+    public function actionCreate(): array
+    {
         if($this->getIsUserAdmin()) {
             $model = new Genre();
             $load = $model->load(Yii::$app->request->post(), '');
+            $model->status = Genre::STATUS_ACTIVE;
 
             if($load && $model->validate() && $model->save()) {
                 return [
@@ -89,7 +101,7 @@ class GenreController extends \yii\rest\Controller
         ];
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): array
     {
         $requestBody = Yii::$app->request->post();
 
@@ -111,7 +123,7 @@ class GenreController extends \yii\rest\Controller
         ];
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): array
     {
         if ($this->getIsUserAdmin() && $id) {
             $model = Genre::find()
@@ -132,7 +144,8 @@ class GenreController extends \yii\rest\Controller
         ];
     }
 
-    private function getIsUserAdmin() {
+    private function getIsUserAdmin(): bool
+    {
         return Yii::$app->user->can('admin');
     }
 }

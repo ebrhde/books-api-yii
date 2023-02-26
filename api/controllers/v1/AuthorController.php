@@ -23,7 +23,7 @@ class AuthorController extends Controller
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         $behaviors = parent::behaviors();
 
@@ -36,10 +36,20 @@ class AuthorController extends Controller
             'class' => HttpBearerAuth::class,
         ];
 
+        $behaviors['verbs'] = [
+            'class' => \yii\filters\VerbFilter::class,
+            'actions' => [
+                'index' => ['GET'],
+                'create' => ['POST'],
+                'update' => ['PATCH'],
+                'delete' => ['DELETE'],
+            ],
+        ];
+
         return $behaviors;
     }
 
-    public function actionIndex()
+    public function actionIndex(): array
     {
 
         if($this->getIsUserAdmin()) {
@@ -72,7 +82,8 @@ class AuthorController extends Controller
         ];
     }
 
-    public function actionCreate() {
+    public function actionCreate(): array
+    {
         if($this->getIsUserAdmin()) {
             $model = new Author();
             $load = $model->load(Yii::$app->request->post(), '');
@@ -90,7 +101,7 @@ class AuthorController extends Controller
         ];
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): array
     {
         $requestBody = Yii::$app->request->post();
 
@@ -112,7 +123,7 @@ class AuthorController extends Controller
         ];
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id): array
     {
         if ($this->getIsUserAdmin() && $id) {
             $model = Author::find()
@@ -133,7 +144,8 @@ class AuthorController extends Controller
         ];
     }
 
-    private function getIsUserAdmin() {
+    private function getIsUserAdmin(): bool
+    {
         return Yii::$app->user->can('admin');
     }
 }

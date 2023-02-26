@@ -12,14 +12,14 @@ class BookSearch extends \common\models\Book
     public ?string $genre = null;
     public ?string $date = null;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['genre', 'author', 'country', 'date'], 'safe'],
         ];
     }
 
-    public function search($params)
+    public function search(array $params): ?array
     {
         $query = Book::find()
             ->distinct()
@@ -56,7 +56,7 @@ class BookSearch extends \common\models\Book
         return $query->all();
     }
 
-    public function formName()
+    public function formName(): string
     {
         return '';
     }

@@ -14,7 +14,7 @@ class SiteController extends \yii\rest\Controller
 {
     public $modelClass = '';
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'options' => [
@@ -23,7 +23,7 @@ class SiteController extends \yii\rest\Controller
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
 
         $behaviors = parent::behaviors();
@@ -39,9 +39,19 @@ class SiteController extends \yii\rest\Controller
             'except' => ['login'] // it's doesn't run in login action
         ];
 
+        $behaviors['verbs'] = [
+            'class' => \yii\filters\VerbFilter::class,
+            'actions' => [
+                'login' => ['POST'],
+            ],
+        ];
+
         return $behaviors;
     }
 
+    /**
+     * @return array|LoginForm
+     */
     public function actionLogin() {
         $model = new LoginForm();
 
