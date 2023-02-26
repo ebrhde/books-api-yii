@@ -7,6 +7,7 @@ use yii\data\ActiveDataProvider;
 
 class BookSearch extends \common\models\Book
 {
+    public ?string $q = null;
     public ?string $author = null;
     public ?string $country = null;
     public ?string $genre = null;
@@ -15,7 +16,7 @@ class BookSearch extends \common\models\Book
     public function rules(): array
     {
         return [
-            [['genre', 'author', 'country', 'date'], 'safe'],
+            [['q', 'genre', 'author', 'country', 'date'], 'safe'],
         ];
     }
 
@@ -27,6 +28,12 @@ class BookSearch extends \common\models\Book
             ->andWhere(['b.status' => Book::STATUS_ACTIVE]);
 
         $this->load($params, '');
+
+        $this->q = str_replace('+', ' ', $this->q);
+
+        if ($this->q) {
+            $query->andWhere(['b.title' => $this->q]);
+        }
 
         if (!$this->validate()) {
             return null;
