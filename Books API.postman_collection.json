@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "6e4b0de5-3349-4dad-becd-5663f4d7679f",
+		"name": "Books API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/v1/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/genre?page=1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"genre"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"History\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/genre/create",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"genre",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Science\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/genre/update/1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"genre",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/genre/delete/1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"genre",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/author?page=1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"author"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Stefan Zweig\",\n    \"country\":\"Austria\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/author/create",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"author",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Stefan Zweig\",\n    \"country\":\"Austria\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/author/update/1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"author",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/author/delete/1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"author",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/book?page=1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"book"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Beware of Pity\",\n    \"author\":1,\n    \"genres\":\"Novel, Fiction\",\n    \"publishing_date\":\"2002-03-14\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/book/create",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"book",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Beware of Pity\",\n    \"author\":1,\n    \"genres\":\"Novel, Fiction\",\n    \"publishing_date\":\"1994-06-25\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/book/update/1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"book",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6M30.eyJzdWIiOjMsImlzcyI6IiIsImF1ZCI6IiIsImlhdCI6MTY3NzQzMjQzOCwiZXhwIjoxNjc3NDM2MDM4LCJqdGkiOiJmY2U2Yzc3NGM3Y2MzY2IiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSJ9.H0F9QSbgGABb-Gni5Ycv7xShnYsfocHZa4uMDVvPxEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://yii2.ebrtest.com/v1/book/delete/1",
+							"protocol": "http",
+							"host": [
+								"yii2",
+								"ebrtest",
+								"com"
+							],
+							"path": [
+								"v1",
+								"book",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
