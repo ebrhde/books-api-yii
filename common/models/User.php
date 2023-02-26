@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use Dersonsena\JWTTools\JWTTools;
+use kaabar\jwt\Jwt;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -82,7 +84,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        $decodedToken = JWTTools::build(Yii::$app->params['jwt']['secret'])
+            ->decodeToken($token);
+
+        return static::findOne(['id' => $decodedToken->sub]);
     }
 
     /**
