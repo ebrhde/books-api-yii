@@ -43,6 +43,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'v1/login' => 'v1/site/login',
                 'v1/author/delete/<id:([0-9]+)>' => 'v1/author/delete',
                 'v1/genre/delete/<id:([0-9]+)>' => 'v1/genre/delete',
                 'v1/book/delete/<id:([0-9]+)>' => 'v1/book/delete',
