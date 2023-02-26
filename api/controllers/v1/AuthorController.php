@@ -105,6 +105,13 @@ class AuthorController extends Controller
     {
         $requestBody = Yii::$app->request->post();
 
+        if(isset($requestBody['status']) && $requestBody['status'] === Author::STATUS_DELETED) {
+            return [
+                'status' => 'error',
+                'message' => 'To delete an author please use special endpoint'
+            ];
+        }
+
         if ($this->getIsUserAdmin() && !empty($requestBody)) {
             $model = Author::find()
                 ->where(['id' => $id])

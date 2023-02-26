@@ -156,7 +156,19 @@ class BookController extends \yii\rest\Controller
     public function actionUpdate(int $id): array
     {
         $requestBody = Yii::$app->request->post();
-        $genreTitles = explode(',', $requestBody['genres']);
+
+        $genreTitles = null;
+
+        if(isset($requestBody['status']) && $requestBody['status'] === Book::STATUS_DELETED) {
+            return [
+                'status' => 'error',
+                'message' => 'To delete a book please use special endpoint'
+            ];
+        }
+
+        if(isset($requestBody['genres']) && $requestBody['genres']) {
+            $genreTitles = explode(',', $requestBody['genres']);
+        }
 
         if ($this->getIsUserAdmin() && $id && !empty($requestBody)) {
             $model = Book::find()
@@ -166,7 +178,7 @@ class BookController extends \yii\rest\Controller
             if ($model) {
                 $load = $model->load($requestBody, '');
 
-                if($requestBody['genres']) {
+                if($genreTitles) {
                     BookGenre::deleteAll(['book_id' => $model->id]);
                     $this->fillGenres($model->id, $genreTitles);
                 }

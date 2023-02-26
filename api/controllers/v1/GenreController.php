@@ -105,6 +105,13 @@ class GenreController extends \yii\rest\Controller
     {
         $requestBody = Yii::$app->request->post();
 
+        if(isset($requestBody['status']) && $requestBody['status'] === Genre::STATUS_DELETED) {
+            return [
+                'status' => 'error',
+                'message' => 'To delete a genre please use special endpoint'
+            ];
+        }
+
         if ($this->getIsUserAdmin() && $id && !empty($requestBody)) {
             $model = Genre::find()
                 ->where(['id' => $id])
